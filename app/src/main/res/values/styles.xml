@@ -1,0 +1,48 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/mainColor</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="Transparent_Dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="Anim_Dialog_Bottom">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_out</item>
+    </style>
+
+    <style name="usual_button">
+        <item name="android:layout_marginLeft">@dimen/margin</item>
+        <item name="android:layout_marginRight">@dimen/margin</item>
+        <item name="android:layout_marginTop">@dimen/margin</item>
+        <item name="android:layout_height">@dimen/usual_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/bg_button</item>
+        <item name="android:textColor">@color/text_color_button</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/usual_txt_size</item>
+    </style>
+
+</resources>

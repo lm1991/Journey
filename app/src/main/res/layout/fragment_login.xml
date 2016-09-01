@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/mainColor"
+              android:focusable="false"
+              android:focusableInTouchMode="true"
+              android:orientation="vertical">
+
+    <com.mesor.journey.framework.ToolLayout
+        android:id="@+id/toolLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/usual_height"
+        app:title="登录"></com.mesor.journey.framework.ToolLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/bg_round_stroke"
+        android:padding="@dimen/px_10"
+        android:textColorHint="#ccffffff"
+        app:errorEnabled="false">
+
+        <EditText
+            android:id="@+id/mobileEt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_120"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"
+            android:hint="手机号码"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:paddingLeft="@dimen/px_100"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/usual_txt_size"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:background="@drawable/bg_round_stroke"
+        android:padding="@dimen/px_10"
+        android:textColorHint="#ccffffff"
+        app:errorEnabled="false">
+
+        <EditText
+            android:id="@+id/passwordEt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_120"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:paddingLeft="@dimen/px_100"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/usual_txt_size"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/loginTv"
+        style="@style/usual_button"
+        android:text="登录"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/registerTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin"
+            android:text="注册"
+            android:textColor="#aaffffff"
+            android:textSize="@dimen/t_50"/>
+
+        <TextView
+            android:id="@+id/resetPasswordTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/margin"
+            android:text="忘记密码？"
+            android:textColor="#aaffffff"
+            android:textSize="@dimen/t_50"/>
+    </RelativeLayout>
+
+</LinearLayout>

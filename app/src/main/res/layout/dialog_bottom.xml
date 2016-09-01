@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rootView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:orientation="vertical"
+                android:padding="@dimen/margin">
+
+    <LinearLayout
+        android:id="@+id/itemsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"></LinearLayout>
+
+    <TextView
+        android:id="@+id/cancelTv"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/px_120"
+        android:textSize="@dimen/usual_txt_size"
+        android:textColor="@color/black_3"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_round_item"
+        android:gravity="center"
+        android:text="取消"/>
+
+</LinearLayout>

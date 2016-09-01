@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_200"
+                android:background="@color/mainColor">
+
+    <View
+        android:background="#423846"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+
+    <ImageView
+        android:id="@+id/backV"
+        android:layout_width="@dimen/px_140"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/px_65"
+        android:paddingTop="@dimen/px_65"
+        android:src="@drawable/icon_back"/>
+
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="Title"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/t_62"/>
+
+    <ImageView
+        android:id="@+id/rightImgV"
+        android:layout_alignParentRight="true"
+        android:layout_width="@dimen/px_140"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/px_65"
+        android:paddingTop="@dimen/px_65"/>
+
+    <TextView
+        android:id="@+id/rightTv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/t_62"/>
+
+</RelativeLayout>
