@@ -7,6 +7,7 @@ public class Constants {
 
     public static final int SEND_VERIFY_CODE_DELAY = 120;
 
+    public static final int MAX_SCALE_PER_PIXEL = 130;//每像素130以下时， 请求标记
     public static final String MAP_KEY = "ccf2aa6139e6229c74aca7bbf9d0785f";
     public static final String MAP_KEY_CLOUD = "6bacd0a8bdd2849d83ca951f8b200c67";
     public static final String MAP_ID_WATER = "57c01c4b2376c174828d8fa9";

@@ -1,5 +1,6 @@
 package com.mesor.journey.framework;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,7 @@ import com.avos.avoscloud.AVAnalytics;
 import com.mesor.journey.R;
 import com.mesor.journey.application.App;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -20,7 +22,25 @@ import butterknife.ButterKnife;
  */
 public class BaseActivity extends AppCompatActivity implements BaseView {
 
+    public final static String NO_TITLE = "no_title_toolbar";
+
     private View rootView;
+
+    @BindView(R.id.toolLayout)
+    public ToolLayout toolLayout;
+
+    protected void showNavigationResId(int resId) {
+        toolLayout.showNavigationResId(resId);
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        toolLayout.setTitle(title);
+    }
+
+    protected void setOnTitleListener(ToolLayout.OnTitleListener listener) {
+        toolLayout.setOnTitleListener(listener);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,9 +48,20 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
         rootView = LayoutInflater.from(this).inflate(R.layout.activity_base, null);
         setContentView(rootView);
         ButterKnife.bind(this);
+        Intent intent = getIntent();
+        if (intent == null || !intent.getBooleanExtra(NO_TITLE, false)) {
+            setSupportActionBar(toolLayout);
+        } else {
+            toolLayout.setVisibility(View.GONE);
+        }
         ActivityManager.getInstance().pushActivity(this);
     }
 
+    /**
+     * set tool bar.
+     * @param savedInstanceState
+     * @param layoutId
+     */
     public void onCreate(Bundle savedInstanceState, int layoutId) {
         super.onCreate(savedInstanceState);
         rootView = LayoutInflater.from(this).inflate(layoutId, null);

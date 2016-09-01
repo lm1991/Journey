@@ -1,4 +1,4 @@
-package com.mesor.journey.main.view;
+package com.mesor.journey.main;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -27,6 +27,8 @@ import com.amap.api.services.cloud.CloudResult;
 import com.mesor.journey.R;
 import com.mesor.journey.framework.BaseActivity;
 import com.mesor.journey.main.presenter.MainPresenter;
+import com.mesor.journey.main.view.CloudOverlay;
+import com.mesor.journey.main.view.MainView;
 import com.mesor.journey.utils.AMapUtil;
 import com.mesor.journey.utils.ToastUtil;
 
@@ -86,24 +88,24 @@ public class MainActivity extends BaseActivity implements MainView {
 
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
-    @OnClick({R.id.fab})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.fab:
-                LatLng latLng = mMapView.getMap().getProjection().fromScreenLocation(new Point(getResources().getDisplayMetrics().widthPixels / 2,
-                        getResources().getDisplayMetrics().heightPixels / 2));
+//    @TargetApi(Build.VERSION_CODES.M)
+//    @OnClick({R.id.fab})
+//    public void onClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.fab:
+//                LatLng latLng = mMapView.getMap().getProjection().fromScreenLocation(new Point(getResources().getDisplayMetrics().widthPixels / 2,
+//                        getResources().getDisplayMetrics().heightPixels / 2));
 //                if (myLocation == null) {
 //                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
 //                        requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest
 // .permission.ACCESS_LOCATION_EXTRA_COMMANDS}, 0);
 //                    return;
 //                }
-                String location = latLng.longitude + "," + latLng.latitude;
-                mainPresenter.addMark(location);
-                break;
-        }
-    }
+//                String location = latLng.longitude + "," + latLng.latitude;
+//                mainPresenter.addMark(location);
+//                break;
+//        }
+//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

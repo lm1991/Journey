@@ -1,5 +1,6 @@
 package com.mesor.journey.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.mesor.journey.R;
@@ -13,6 +14,12 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        if (intent == null) {
+            intent = new Intent();
+            setIntent(intent);
+        }
+        intent.putExtra(NO_TITLE, true);
         super.onCreate(savedInstanceState);
         getSupportFragmentManager().beginTransaction().replace(R.id.content, new SplashFragment()).commitAllowingStateLoss();
     }

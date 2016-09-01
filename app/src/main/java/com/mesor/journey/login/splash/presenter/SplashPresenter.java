@@ -1,11 +1,13 @@
 package com.mesor.journey.login.splash.presenter;
 
+import android.os.Bundle;
 import android.os.Handler;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.LogInCallback;
 import com.google.gson.Gson;
+import com.mesor.journey.framework.BaseActivity;
 import com.mesor.journey.framework.BasePresenter;
 import com.mesor.journey.login.LoginOrRegisterFragment;
 import com.mesor.journey.login.registe.info.InfoError;
@@ -41,7 +43,9 @@ public class SplashPresenter extends BasePresenter<SplashView> {
                 @Override
                 public void run() {
                     if(splashView != null){
-                        splashView.startFragmentActivity(LoginOrRegisterFragment.class, null);
+                        Bundle bundle = new Bundle();
+                        bundle.putBoolean(BaseActivity.NO_TITLE, true);
+                        splashView.startFragmentActivity(LoginOrRegisterFragment.class, bundle);
                     }
                 }
             }, 1000);

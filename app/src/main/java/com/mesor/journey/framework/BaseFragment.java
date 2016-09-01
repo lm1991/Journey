@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
+import com.mesor.journey.R;
 import com.mesor.journey.application.App;
 
 import butterknife.ButterKnife;
@@ -21,6 +22,8 @@ public abstract class BaseFragment extends Fragment implements BaseView, initUi 
 
     protected View rootView;
 
+    protected final static String NO_TITLE = BaseActivity.NO_TITLE;
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState, int layoutId) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -29,6 +32,22 @@ public abstract class BaseFragment extends Fragment implements BaseView, initUi 
         initView();
         initData();
         return rootView;
+    }
+
+    protected void showNavigationResId(int resId) {
+        BaseActivity activity = (BaseActivity)getActivity();
+        activity.showNavigationResId(resId);
+    }
+
+    protected void setOnTitleListener(ToolLayout.OnTitleListener listener) {
+        BaseActivity activity = (BaseActivity)getActivity();
+        activity.setOnTitleListener(listener);
+        showNavigationResId(R.drawable.icon_back);
+    }
+
+    protected void setTitle(String title) {
+        BaseActivity activity = (BaseActivity)getActivity();
+        activity.setTitle(title);
     }
 
     protected void finish() {

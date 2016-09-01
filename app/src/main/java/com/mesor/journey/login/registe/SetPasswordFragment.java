@@ -39,8 +39,6 @@ public class SetPasswordFragment extends BaseFragment implements SetPasswordView
     private InfoAccount infoAccount;
     private boolean isResetPassword = false;
 
-    @BindView(R.id.toolLayout)
-    ToolLayout toolLayout;
     @BindView(R.id.registerTipTv)
     TextView registerTipTv;
     @BindView(R.id.codeEt)
@@ -114,17 +112,12 @@ public class SetPasswordFragment extends BaseFragment implements SetPasswordView
 
     @Override
     public void initView() {
-        toolLayout.setTitle(isResetPassword ? "重设密码" : "注册");
+        setTitle(isResetPassword ? "重设密码" : "注册");
         nextStepTv.setText(isResetPassword ? "提交" : "下一步");
-        toolLayout.setOnTitleListener(new ToolLayout.OnTitleListener() {
+        setOnTitleListener(new ToolLayout.OnTitleListener() {
             @Override
             public void clickBack() {
-                getActivity().finish();
-            }
-
-            @Override
-            public void clickTitle() {
-
+                finish();
             }
 
             @Override

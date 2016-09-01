@@ -31,8 +31,6 @@ import butterknife.OnClick;
  */
 public class RegisteFragment extends BaseFragment implements RegisterView {
 
-    @BindView(R.id.toolLayout)
-    ToolLayout toolLayout;
     @BindView(R.id.mobileEt)
     EditText mobileEt;
     @BindView(R.id.textInputLayout)
@@ -82,17 +80,12 @@ public class RegisteFragment extends BaseFragment implements RegisterView {
     @Override
     public void initView() {
         if (!isResetPassword)
-            toolLayout.setBackVIsVisible(false);
-        toolLayout.setTitle(isResetPassword ? "找回密码" : "注册");
-        toolLayout.setOnTitleListener(new ToolLayout.OnTitleListener() {
+            showNavigationResId(-1);
+        setTitle(isResetPassword ? "找回密码" : "注册");
+        setOnTitleListener(new ToolLayout.OnTitleListener() {
             @Override
             public void clickBack() {
                 finish();
-            }
-
-            @Override
-            public void clickTitle() {
-
             }
 
             @Override

@@ -29,8 +29,6 @@ import butterknife.OnClick;
  */
 public class LoginFragment extends BaseFragment implements LoginView {
 
-    @BindView(R.id.toolLayout)
-    ToolLayout toolLayout;
     @BindView(R.id.textInputLayout)
     TextInputLayout textInputLayout;
     @BindView(R.id.mobileEt)
@@ -55,15 +53,11 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @Override
     public void initView() {
-        toolLayout.setOnTitleListener(new ToolLayout.OnTitleListener() {
+        setTitle("登录");
+        setOnTitleListener(new ToolLayout.OnTitleListener() {
             @Override
             public void clickBack() {
                 finish();
-            }
-
-            @Override
-            public void clickTitle() {
-
             }
 
             @Override

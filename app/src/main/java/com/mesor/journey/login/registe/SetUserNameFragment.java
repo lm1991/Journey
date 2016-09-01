@@ -46,8 +46,6 @@ public class SetUserNameFragment extends BaseFragment implements SetUserNameView
 
     private SetUserNamePresenter setUserNamePresenter;
 
-    @BindView(R.id.toolLayout)
-    ToolLayout toolLayout;
     @BindView(R.id.avatarImageV)
     ImageView avatarImageV;
     @BindView(R.id.userNameEt)
@@ -228,16 +226,11 @@ public class SetUserNameFragment extends BaseFragment implements SetUserNameView
 
     @Override
     public void initView() {
-        toolLayout.setTitle("完善信息");
-        toolLayout.setOnTitleListener(new ToolLayout.OnTitleListener() {
+        setTitle("完善信息");
+        setOnTitleListener(new ToolLayout.OnTitleListener() {
             @Override
             public void clickBack() {
-                getActivity().finish();
-            }
-
-            @Override
-            public void clickTitle() {
-
+                finish();
             }
 
             @Override

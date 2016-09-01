@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              app:layout_behavior="@string/appbar_scrolling_view_behavior"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/mainColor"
               android:focusable="false"
               android:focusableInTouchMode="true"
               android:orientation="vertical">
-
-    <com.mesor.journey.framework.ToolLayout
-        android:id="@+id/toolLayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/usual_height"
-        app:title="登录"></com.mesor.journey.framework.ToolLayout>
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout"

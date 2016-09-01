@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              app:layout_behavior="@string/appbar_scrolling_view_behavior"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/mainColor"
@@ -8,14 +9,9 @@
               android:focusableInTouchMode="true"
               android:orientation="vertical">
 
-    <com.mesor.journey.framework.ToolLayout
-        android:id="@+id/toolLayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/usual_height"></com.mesor.journey.framework.ToolLayout>
-
     <ImageView
         android:id="@+id/avatarImageV"
-        android:scaleType="centerInside"
+        android:scaleType="fitCenter"
         android:padding="2px"
         android:src="@drawable/icon_avatar_default"
         android:layout_margin="@dimen/margin"
