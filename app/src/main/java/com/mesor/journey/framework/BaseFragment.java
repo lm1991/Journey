@@ -1,10 +1,12 @@
 package com.mesor.journey.framework;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.PermissionChecker;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,18 +37,18 @@ public abstract class BaseFragment extends Fragment implements BaseView, initUi 
     }
 
     protected void showNavigationResId(int resId) {
-        BaseActivity activity = (BaseActivity)getActivity();
+        BaseActivity activity = (BaseActivity) getActivity();
         activity.showNavigationResId(resId);
     }
 
     protected void setOnTitleListener(ToolLayout.OnTitleListener listener) {
-        BaseActivity activity = (BaseActivity)getActivity();
+        BaseActivity activity = (BaseActivity) getActivity();
         activity.setOnTitleListener(listener);
         showNavigationResId(R.drawable.icon_back);
     }
 
     protected void setTitle(String title) {
-        BaseActivity activity = (BaseActivity)getActivity();
+        BaseActivity activity = (BaseActivity) getActivity();
         activity.setTitle(title);
     }
 
@@ -76,5 +78,12 @@ public abstract class BaseFragment extends Fragment implements BaseView, initUi 
         }
 //        InputMethodManager inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 //        inputMethodManager.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
+    }
+
+    protected boolean checkPermission(String permission) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true;
+        }
+        return getActivity().checkSelfPermission(permission) == PermissionChecker.PERMISSION_GRANTED;
     }
 }

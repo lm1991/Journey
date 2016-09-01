@@ -18,7 +18,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        app:fab_addButtonColorNormal="@color/white"
+        app:fab_addButtonSize="mini"
+        app:fab_addButtonColorNormal="#99ffffff"
         app:fab_addButtonColorPressed="#dddddd"
         app:fab_addButtonPlusIconColor="#aaaaaa"
         android:background="#00000000"
@@ -30,6 +31,7 @@
             android:id="@+id/action_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:fab_addButtonSize="mini"
             app:fab_colorNormal="@color/white"
             app:fab_title="Action A"
             app:fab_colorPressed="#dddddd"/>
@@ -38,6 +40,7 @@
             android:id="@+id/action_b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:fab_addButtonSize="mini"
             app:fab_colorNormal="@color/white"
             app:fab_title="Action with a very long name that won\'t fit on the screen"
             app:fab_colorPressed="#dddddd"/>

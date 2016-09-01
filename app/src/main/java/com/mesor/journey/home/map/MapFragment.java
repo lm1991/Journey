@@ -23,6 +23,7 @@ import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.services.cloud.CloudItem;
 import com.amap.api.services.cloud.CloudItemDetail;
 import com.amap.api.services.cloud.CloudResult;
@@ -70,12 +71,13 @@ public class MapFragment extends BaseFragment implements com.mesor.journey.home.
         setTitle("Home");
         mMapView.getMap().getUiSettings().setTiltGesturesEnabled(false);
         mMapView.getMap().getUiSettings().setZoomControlsEnabled(false);
+
         mMapView.getMap().setOnMarkerClickListener(this);
         mMapView.getMap().setOnMapTouchListener(new AMap.OnMapTouchListener() {
             @Override
             public void onTouch(MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    if(mMapView.getMap().getScalePerPixel() > Constants.MAX_SCALE_PER_PIXEL) {
+                    if (mMapView.getMap().getScalePerPixel() > Constants.MAX_SCALE_PER_PIXEL) {
                         return;
                     }
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
@@ -112,6 +114,25 @@ public class MapFragment extends BaseFragment implements com.mesor.journey.home.
                         //, projection.fromScreenLocation(new Point(right, bottom))
                 };
                 mapPresenter.searchMarks(latLngs);
+
+                /*
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+Manifest.permission.ACCESS_FINE_LOCATION,
+Manifest.permission.WRITE_EXTERNAL_STORAGE,
+Manifest.permission.READ_EXTERNAL_STORAGE,
+Manifest.permission.READ_PHONE_STATE
+                 */
+//                if (!checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ||
+//                        !checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) ||
+//                        !checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
+//                        !checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ||
+//                        !checkPermission(Manifest.permission.CHANGE_WIFI_STATE) ||
+//                        !checkPermission(Manifest.permission.READ_PHONE_STATE)) {
+//                    requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
+//                            Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CHANGE_WIFI_STATE, Manifest.permission.READ_EXTERNAL_STORAGE,
+//                            Manifest.permission.READ_PHONE_STATE}, 2);
+//                    return;
+//                }
             }
         });
         initFloat();
@@ -121,9 +142,23 @@ public class MapFragment extends BaseFragment implements com.mesor.journey.home.
     FloatingActionsMenu menuMultipleActions;
     @BindView(R.id.action_b)
     View actionB;
+
     private void initFloat() {
         FloatingActionButton actionC = new FloatingActionButton(getContext());
         actionC.setTitle("Hide/Show Action above");
+        actionC.setSize(FloatingActionButton.SIZE_MINI);
+        FloatingActionButton actionD = new FloatingActionButton(getContext());
+        actionD.setTitle("Hide/Show Action above");
+        actionD.setSize(FloatingActionButton.SIZE_MINI);
+        FloatingActionButton actionE = new FloatingActionButton(getContext());
+        actionE.setTitle("Hide/Show Action above");
+        actionE.setSize(FloatingActionButton.SIZE_MINI);
+        FloatingActionButton actionF = new FloatingActionButton(getContext());
+        actionF.setTitle("Hide/Show Action above");
+        actionF.setSize(FloatingActionButton.SIZE_MINI);
+        FloatingActionButton actionG = new FloatingActionButton(getContext());
+        actionG.setTitle("Hide/Show Action above");
+        actionG.setSize(FloatingActionButton.SIZE_MINI);
         actionC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +167,10 @@ public class MapFragment extends BaseFragment implements com.mesor.journey.home.
         });
 
         menuMultipleActions.addButton(actionC);
+        menuMultipleActions.addButton(actionD);
+        menuMultipleActions.addButton(actionE);
+        menuMultipleActions.addButton(actionF);
+        menuMultipleActions.addButton(actionG);
     }
 
     private void searchMarks() {
@@ -142,6 +181,11 @@ public class MapFragment extends BaseFragment implements com.mesor.journey.home.
     public void initData() {
         mapPresenter = new MapPresenter();
         mapPresenter.attachView(this);
+//        mMapView.getMap().getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
+        mMapView.getMap().setLocationSource(mapPresenter);
+        mMapView.getMap().setMyLocationStyle(new MyLocationStyle());
+        mMapView.getMap().setMyLocationEnabled(true);
+        mMapView.getMap().setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
     }
 
     @Override
@@ -155,6 +199,13 @@ public class MapFragment extends BaseFragment implements com.mesor.journey.home.
             case 1:
                 if (grantResults.length != permissions.length) {
                     showMessage("检索地址信息需要读写存储权限");
+                }
+                break;
+            case 3:
+                if (grantResults.length != permissions.length) {
+                    showMessage("定位功能需要读写存储、定位、读取手机状态和修改无线状态权限");
+                }else {
+                    mMapView.getMap().setMyLocationEnabled(true);
                 }
                 break;
         }

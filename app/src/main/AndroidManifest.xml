@@ -25,6 +25,9 @@
             android:name="com.amap.api.v2.apikey"
             android:value="56e08f2bf4aabcaba928a74ef8ea0629"/>
 
+        <!-- 定位  -->
+        <service android:name="com.amap.api.location.APSService"></service>
+
         <activity
             android:name=".login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
