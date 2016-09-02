@@ -27,14 +27,14 @@ import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.services.cloud.CloudItem;
 import com.amap.api.services.cloud.CloudItemDetail;
 import com.amap.api.services.cloud.CloudResult;
-import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.mesor.journey.R;
 import com.mesor.journey.framework.BaseFragment;
 import com.mesor.journey.main.view.CloudOverlay;
 import com.mesor.journey.utils.AMapUtil;
 import com.mesor.journey.utils.Constants;
 import com.mesor.journey.utils.ToastUtil;
+import com.mesor.journey.view.floating.FloatingActionButton;
+import com.mesor.journey.view.floating.FloatingActionsMenu;
 
 import java.util.ArrayList;
 import java.util.Iterator;

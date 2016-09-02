@@ -1,4 +1,4 @@
-package com.getbase.floatingactionbutton;
+package com.mesor.journey.view.floating;
 
 import android.content.Context;
 import android.content.res.TypedArray;
