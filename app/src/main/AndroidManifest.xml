@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <!-- 基础模块 END -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -21,11 +22,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!--
+        c debug key: 89214f021d9662d3ecc22c5498303f0a
+        debug key:56e08f2bf4aabcaba928a74ef8ea0629
+        key: ccf2aa6139e6229c74aca7bbf9d0785f
+        -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="56e08f2bf4aabcaba928a74ef8ea0629"/>
+            android:value="89214f021d9662d3ecc22c5498303f0a"/>
 
-        <!-- 定位  -->
         <service android:name="com.amap.api.location.APSService"></service>
 
         <activity

@@ -23,7 +23,6 @@ import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
-import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.services.cloud.CloudItem;
 import com.amap.api.services.cloud.CloudItemDetail;
 import com.amap.api.services.cloud.CloudResult;
@@ -69,6 +68,46 @@ public class MapFragment extends BaseFragment implements com.mesor.journey.home.
     @Override
     public void initView() {
         setTitle("Home");
+        setUpMap();
+        initFloat();
+    }
+
+    @BindView(R.id.multiple_actions)
+    FloatingActionsMenu menuMultipleActions;
+    @BindView(R.id.action_b)
+    View actionB;
+
+    private void initFloat() {
+        FloatingActionButton actionC = new FloatingActionButton(getContext());
+        actionC.setTitle("Hide/Show Action above");
+        actionC.setSize(FloatingActionButton.SIZE_MINI);
+        FloatingActionButton actionD = new FloatingActionButton(getContext());
+        actionD.setTitle("Hide/Show Action above");
+        actionD.setSize(FloatingActionButton.SIZE_MINI);
+        FloatingActionButton actionE = new FloatingActionButton(getContext());
+        actionE.setTitle("Hide/Show Action above");
+        actionE.setSize(FloatingActionButton.SIZE_MINI);
+        FloatingActionButton actionF = new FloatingActionButton(getContext());
+        actionF.setTitle("Hide/Show Action above");
+        actionF.setSize(FloatingActionButton.SIZE_MINI);
+        FloatingActionButton actionG = new FloatingActionButton(getContext());
+        actionG.setTitle("Hide/Show Action above");
+        actionG.setSize(FloatingActionButton.SIZE_MINI);
+        actionC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actionB.setVisibility(actionB.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+            }
+        });
+
+        menuMultipleActions.addButton(actionC);
+        menuMultipleActions.addButton(actionD);
+        menuMultipleActions.addButton(actionE);
+        menuMultipleActions.addButton(actionF);
+        menuMultipleActions.addButton(actionG);
+    }
+
+    private void setUpMap() {
         mMapView.getMap().getUiSettings().setTiltGesturesEnabled(false);
         mMapView.getMap().getUiSettings().setZoomControlsEnabled(false);
 
@@ -115,66 +154,8 @@ public class MapFragment extends BaseFragment implements com.mesor.journey.home.
                 };
                 mapPresenter.searchMarks(latLngs);
 
-                /*
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-Manifest.permission.ACCESS_FINE_LOCATION,
-Manifest.permission.WRITE_EXTERNAL_STORAGE,
-Manifest.permission.READ_EXTERNAL_STORAGE,
-Manifest.permission.READ_PHONE_STATE
-                 */
-//                if (!checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ||
-//                        !checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) ||
-//                        !checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
-//                        !checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ||
-//                        !checkPermission(Manifest.permission.CHANGE_WIFI_STATE) ||
-//                        !checkPermission(Manifest.permission.READ_PHONE_STATE)) {
-//                    requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
-//                            Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CHANGE_WIFI_STATE, Manifest.permission.READ_EXTERNAL_STORAGE,
-//                            Manifest.permission.READ_PHONE_STATE}, 2);
-//                    return;
-//                }
             }
         });
-        initFloat();
-    }
-
-    @BindView(R.id.multiple_actions)
-    FloatingActionsMenu menuMultipleActions;
-    @BindView(R.id.action_b)
-    View actionB;
-
-    private void initFloat() {
-        FloatingActionButton actionC = new FloatingActionButton(getContext());
-        actionC.setTitle("Hide/Show Action above");
-        actionC.setSize(FloatingActionButton.SIZE_MINI);
-        FloatingActionButton actionD = new FloatingActionButton(getContext());
-        actionD.setTitle("Hide/Show Action above");
-        actionD.setSize(FloatingActionButton.SIZE_MINI);
-        FloatingActionButton actionE = new FloatingActionButton(getContext());
-        actionE.setTitle("Hide/Show Action above");
-        actionE.setSize(FloatingActionButton.SIZE_MINI);
-        FloatingActionButton actionF = new FloatingActionButton(getContext());
-        actionF.setTitle("Hide/Show Action above");
-        actionF.setSize(FloatingActionButton.SIZE_MINI);
-        FloatingActionButton actionG = new FloatingActionButton(getContext());
-        actionG.setTitle("Hide/Show Action above");
-        actionG.setSize(FloatingActionButton.SIZE_MINI);
-        actionC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                actionB.setVisibility(actionB.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
-            }
-        });
-
-        menuMultipleActions.addButton(actionC);
-        menuMultipleActions.addButton(actionD);
-        menuMultipleActions.addButton(actionE);
-        menuMultipleActions.addButton(actionF);
-        menuMultipleActions.addButton(actionG);
-    }
-
-    private void searchMarks() {
-
     }
 
     @Override
@@ -183,9 +164,27 @@ Manifest.permission.READ_PHONE_STATE
         mapPresenter.attachView(this);
 //        mMapView.getMap().getUiSettings().setMyLocationButtonEnabled(true);// 设置默认定位按钮是否显示
         mMapView.getMap().setLocationSource(mapPresenter);
-        mMapView.getMap().setMyLocationStyle(new MyLocationStyle());
+//        mMapView.getMap().setMyLocationType(AMap.LOCATION_TYPE_MAP_ROTATE);
+        if (!checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION) ||
+                !checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) ||
+                !checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
+                !checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ||
+                !checkPermission(Manifest.permission.READ_PHONE_STATE)) {
+            if (!shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION) ||
+                    !shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) ||
+                    !shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
+                    !shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) ||
+                    !shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE)) {
+                showMessage("没有权限");
+                return;
+            }
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_PHONE_STATE}, 2);
+
+            return;
+        }
         mMapView.getMap().setMyLocationEnabled(true);
-        mMapView.getMap().setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
     }
 
     @Override
@@ -204,7 +203,7 @@ Manifest.permission.READ_PHONE_STATE
             case 3:
                 if (grantResults.length != permissions.length) {
                     showMessage("定位功能需要读写存储、定位、读取手机状态和修改无线状态权限");
-                }else {
+                } else {
                     mMapView.getMap().setMyLocationEnabled(true);
                 }
                 break;
@@ -317,43 +316,6 @@ Manifest.permission.READ_PHONE_STATE
                                 Log.d(TAG, key + "   " + val);
                             }
                         }
-//                        if (mainPresenter.getmQuery().getBound().getShape()
-//                                .equals(CloudSearch.SearchBound.BOUND_SHAPE)) {// 圆形
-//                            mMapView.getMap().addCircle(new CircleOptions()
-//                                    .center(new LatLng(mCenterPoint
-//                                            .getLatitude(), mCenterPoint
-//                                            .getLongitude())).radius(5000)
-//                                    .strokeColor(
-//                                            // Color.argb(50, 1, 1, 1)
-//                                            Color.RED)
-//                                    .fillColor(Color.argb(50, 1, 1, 1))
-//                                    .strokeWidth(5));
-//
-//                            mMapView.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(
-//                                    new LatLng(mCenterPoint.getLatitude(),
-//                                            mCenterPoint.getLongitude()), 12));
-//
-//                        } else if (mainPresenter.getmQuery().getBound().getShape()
-//                                .equals(CloudSearch.SearchBound.POLYGON_SHAPE)) {
-//                        mMapView.getMap().addPolygon(new PolygonOptions()
-//                                .add(latLngs[0])
-//                                .add(latLngs[1])
-//                                .add(latLngs[2])
-//                                .add(latLngs[3])
-//                                .fillColor(Color.argb(50, 1, 1, 1))
-//                                .strokeColor(Color.RED).strokeWidth(1));
-//                        LatLngBounds bounds = new LatLngBounds.Builder()
-//                                .include(latLngs[0])
-//                                .include(latLngs[1])
-//                                .include(latLngs[2])
-//                                .build();
-//                        mMapView.getMap().moveCamera(CameraUpdateFactory
-//                                .newLatLngBounds(bounds, 50));
-//                        } else if ((mainPresenter.getmQuery().getBound().getShape()
-//                                .equals(CloudSearch.SearchBound.LOCAL_SHAPE))) {
-//                            mPoiCloudOverlay.zoomToSpan();
-//                        }
-
                     } else {
                         ToastUtil.show(getContext(), R.string.no_result);
                     }

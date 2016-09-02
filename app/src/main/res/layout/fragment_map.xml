@@ -31,7 +31,7 @@
             android:id="@+id/action_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_addButtonSize="mini"
+            app:fab_size="mini"
             app:fab_colorNormal="@color/white"
             app:fab_title="Action A"
             app:fab_colorPressed="#dddddd"/>
@@ -40,7 +40,7 @@
             android:id="@+id/action_b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:fab_addButtonSize="mini"
+            app:fab_size="mini"
             app:fab_colorNormal="@color/white"
             app:fab_title="Action with a very long name that won\'t fit on the screen"
             app:fab_colorPressed="#dddddd"/>
