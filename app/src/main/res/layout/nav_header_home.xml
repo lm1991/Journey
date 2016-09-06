@@ -15,23 +15,25 @@
         android:id="@+id/avatarImageV"
         android:layout_width="@dimen/px_200"
         android:layout_height="@dimen/px_200"
-        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:layout_marginTop="@dimen/px_30"
         android:background="@drawable/bg_circle"
         android:padding="2px"
         android:scaleType="fitCenter"
         android:src="@drawable/icon_avatar_default"/>
 
     <TextView
+        android:id="@+id/userNameTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Android Studio"
+        android:paddingTop="@dimen/px_50"
+        android:text="User Name"
+        android:textSize="@dimen/usual_txt_size"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/introductionTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="android.studio@android.com"/>
+        android:text="Introduction."/>
 
 </LinearLayout>

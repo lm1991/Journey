@@ -5,8 +5,11 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
 
 import com.mesor.journey.R;
 import com.mesor.journey.framework.BaseActivity;
@@ -14,6 +17,9 @@ import com.mesor.journey.home.map.MapFragment;
 
 public class HomeActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private final int HOME = 0;
+    private int position = HOME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,21 +63,32 @@ public class HomeActivity extends BaseActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if(position != 0) {
+            menu.findItem(R.id.action_search).setVisible(false);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        position = 1;
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            position = 0;
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -86,6 +103,8 @@ public class HomeActivity extends BaseActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        this.getWindow().invalidatePanelMenu(Window.FEATURE_OPTIONS_PANEL);
+        invalidateOptionsMenu();
         return true;
     }
 }

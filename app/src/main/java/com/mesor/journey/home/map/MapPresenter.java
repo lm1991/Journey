@@ -69,8 +69,7 @@ public class MapPresenter extends BasePresenter<MapView> implements AMapLocation
                 new LatLonPoint(latLngs[1].latitude, latLngs[1].longitude));
         cloudSearch.setOnCloudSearchListener(mapView);
         try {
-            mQuery = new CloudSearch.Query(Constants.MAP_ID_WATER, "测试", bound);
-//            cloudSearch.searchCloudDetailAsyn(Constants.MAP_ID_WATER, "1");
+            mQuery = new CloudSearch.Query(Constants.MAP_ID_MAP_1, "测试", bound);
             cloudSearch.searchCloudAsyn(mQuery);
         } catch (AMapException e) {
             e.printStackTrace();
@@ -88,7 +87,7 @@ public class MapPresenter extends BasePresenter<MapView> implements AMapLocation
         infoMapMark.set_name("测试");
         Map infoMapForm = new HashMap();
         infoMapForm.put("key", Constants.MAP_KEY_CLOUD);
-        infoMapForm.put("tableid", Constants.MAP_ID_WATER);
+        infoMapForm.put("tableid", Constants.MAP_ID_MAP_1);
         infoMapForm.put("data", new Gson().toJson(infoMapMark));
         subscription = mapView.getApplicationContext().getService().addMark(Constants.URL_MAP_ADD_MARD, infoMapForm)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())

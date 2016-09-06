@@ -72,6 +72,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".addmark.AddMarkActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>
