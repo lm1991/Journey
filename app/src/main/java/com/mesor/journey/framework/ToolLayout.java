@@ -58,7 +58,7 @@ public class ToolLayout extends Toolbar {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (listener != null) {
-                    listener.clickRight();
+                    listener.clickRight(item);
                 }
                 return true;
             }
@@ -101,7 +101,7 @@ public class ToolLayout extends Toolbar {
     public interface OnTitleListener {
         void clickBack();
 
-        void clickRight();
+        void clickRight(MenuItem item);
     }
 
 }

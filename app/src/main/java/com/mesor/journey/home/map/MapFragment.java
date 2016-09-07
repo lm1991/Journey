@@ -99,6 +99,7 @@ public class MapFragment extends BaseFragment implements com.mesor.journey.home.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
+                intent.putExtra("my_location", mapPresenter.getMyLocation());
                 intent.setClass(getContext(), AddMarkActivity.class);
                 startActivity(intent);
                 menuMultipleActions.collapseImmediately();
@@ -176,14 +177,14 @@ public class MapFragment extends BaseFragment implements com.mesor.journey.home.
                 !checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
                 !checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE) ||
                 !checkPermission(Manifest.permission.READ_PHONE_STATE)) {
-            if (!shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION) ||
-                    !shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) ||
-                    !shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
-                    !shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) ||
-                    !shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE)) {
-                showMessage("没有权限");
-                return;
-            }
+//            if (!shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION) ||
+//                    !shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) ||
+//                    !shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) ||
+//                    !shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) ||
+//                    !shouldShowRequestPermissionRationale(Manifest.permission.READ_PHONE_STATE)) {
+//                showMessage("没有权限");
+//                return;
+//            }
             requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.READ_PHONE_STATE}, 2);

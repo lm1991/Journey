@@ -39,6 +39,8 @@ public class MapPresenter extends BasePresenter<MapView> implements AMapLocation
     private AMapLocationClient mlocationClient;
     private OnLocationChangedListener mListener;
 
+    private AMapLocation mLocation;
+
     public CloudSearch.Query getmQuery() {
         return mQuery;
     }
@@ -50,7 +52,7 @@ public class MapPresenter extends BasePresenter<MapView> implements AMapLocation
 
     @Override
     public void detachView() {
-       deactivate();
+        deactivate();
         super.detachView();
         this.mapView = null;
     }
@@ -115,15 +117,26 @@ public class MapPresenter extends BasePresenter<MapView> implements AMapLocation
 
     @Override
     public void onLocationChanged(AMapLocation amapLocation) {
+        if (amapLocation != null) {
+            mLocation = amapLocation;
+        }
         if (mListener != null && amapLocation != null) {
             if (amapLocation != null
                     && amapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(amapLocation);// 显示系统小蓝点
             } else {
-                String errText = "定位失败," + amapLocation.getErrorCode()+ ": " + amapLocation.getErrorInfo();
-                Log.e("AmapErr",errText);
+                String errText = "定位失败," + amapLocation.getErrorCode() + ": " + amapLocation.getErrorInfo();
+                Log.e("AmapErr", errText);
                 mapView.showMessage(errText);
             }
+        }
+    }
+
+    public LatLng getMyLocation() {
+        if (mLocation != null) {
+            return new LatLng(mLocation.getLatitude(), mLocation.getLongitude());
+        } else {
+            return null;
         }
     }
 

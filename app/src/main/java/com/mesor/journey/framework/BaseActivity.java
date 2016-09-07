@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import android.view.View;
 import com.avos.avoscloud.AVAnalytics;
 import com.mesor.journey.R;
 import com.mesor.journey.application.App;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,6 +62,7 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
 
     /**
      * set tool bar.
+     *
      * @param savedInstanceState
      * @param layoutId
      */
@@ -82,15 +86,8 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
         Fragment fragment = Fragment.instantiate(this, fragmentClass.getName(), arguments);
 
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+        t.addToBackStack(fragmentClass.getName());
         t.replace(R.id.content, fragment);
-        t.commit();
-    }
-
-    protected void setContentFragment(Class<? extends BaseFragment> fragmentClass, Bundle arguments, int contentId) {
-        Fragment fragment = Fragment.instantiate(this, fragmentClass.getName(), arguments);
-
-        FragmentTransaction t = getSupportFragmentManager().beginTransaction();
-        t.replace(contentId, fragment);
         t.commit();
     }
 
@@ -100,6 +97,16 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
         FragmentTransaction t = getSupportFragmentManager().beginTransaction();
         t.replace(R.id.content, fragment);
         t.commit();
+    }
+
+    public Fragment getVisibleFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        for (Fragment fragment : fragments) {
+            if (fragment != null && fragment.isVisible())
+                return fragment;
+        }
+        return null;
     }
 
     @Override

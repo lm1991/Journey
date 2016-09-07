@@ -44,6 +44,12 @@
         <item name="android:windowExitAnimation">@anim/dialog_bottom_out</item>
     </style>
 
+    <style name="divider_h">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">#cccccc</item>
+    </style>
+
     <style name="usual_button">
         <item name="android:layout_marginLeft">@dimen/margin</item>
         <item name="android:layout_marginRight">@dimen/margin</item>

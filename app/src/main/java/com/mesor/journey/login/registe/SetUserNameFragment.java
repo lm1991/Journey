@@ -14,6 +14,7 @@ import android.support.v4.content.PermissionChecker;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -234,7 +235,7 @@ public class SetUserNameFragment extends BaseFragment implements SetUserNameView
             }
 
             @Override
-            public void clickRight() {
+            public void clickRight(MenuItem item) {
 
             }
         });

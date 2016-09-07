@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入标记地址的描述信息"
+            app:errorEnabled="false">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/editTv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/px_800"
+                android:gravity="top"
+                android:padding="@dimen/padding_usual"
+                android:textColorHint="@color/black_9"
+                android:textSize="@dimen/usual_txt_size"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <View style="@style/divider_h"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_320"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/padding_usual"
+            android:paddingRight="@dimen/padding_usual">
+
+            <ImageView
+                android:id="@+id/imageV1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/image_add"/>
+
+            <ImageView
+                android:id="@+id/imageV2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/padding_usual"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/imageV3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/padding_usual"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/imageV4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/padding_usual"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <View style="@style/divider_h"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_80"
+            android:background="#f5f5f5"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_usual"
+            android:text="设置类别"
+            android:textSize="@dimen/t_40"/>
+
+        <View style="@style/divider_h"/>
+
+        <android.support.v7.widget.AppCompatCheckedTextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/usual_height"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_usual"
+            android:paddingRight="@dimen/padding_usual"
+            android:text="111"
+            android:textColor="#000"/>
+        <View style="@style/divider_h"/>
+
+        <android.support.v7.widget.AppCompatCheckedTextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/usual_height"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_usual"
+            android:paddingRight="@dimen/padding_usual"
+            android:text="111"
+            android:textColor="#000"/>
+        <View style="@style/divider_h"/>
+
+        <android.support.v7.widget.AppCompatCheckedTextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/usual_height"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_usual"
+            android:paddingRight="@dimen/padding_usual"
+            android:text="111"
+            android:textColor="#000"/>
+
+    </LinearLayout>
+
+</ScrollView>

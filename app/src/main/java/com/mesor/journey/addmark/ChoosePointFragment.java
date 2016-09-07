@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.PermissionChecker;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -35,8 +34,6 @@ import com.mesor.journey.utils.Constants;
 import com.mesor.journey.utils.ToastUtil;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 
 import butterknife.BindView;
 
@@ -53,7 +50,24 @@ public class ChoosePointFragment extends BaseFragment implements ChoosePointView
     private CloudOverlayMarks mPoiCloudOverlay;
     private ArrayList<CloudItem> mCloudItems;
     private LatLng[] latLngs;
-    private String TAG = getClass().getName();
+
+    public Marker getCurrentMarker() {
+        if (!isValid) {
+            return null;
+        }
+        return currentMarker;
+    }
+
+    private Marker currentMarker;
+
+    private LatLng myLocation;
+    private boolean isValid = false;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        myLocation = getArguments().getParcelable("my_location");
+    }
 
     @Nullable
     @Override
@@ -125,6 +139,8 @@ public class ChoosePointFragment extends BaseFragment implements ChoosePointView
                 }
             }
         });
+        if (myLocation != null)
+            mMapView.getMap().moveCamera(CameraUpdateFactory.newLatLng(myLocation));
         mMapView.getMap().setOnMapLoadedListener(new AMap.OnMapLoadedListener() {
             @Override
             public void onMapLoaded() {
@@ -142,7 +158,19 @@ public class ChoosePointFragment extends BaseFragment implements ChoosePointView
                         //, projection.fromScreenLocation(new Point(right, bottom))
                 };
                 choosePointPresenter.searchMarks(latLngs);
-
+            }
+        });
+        mMapView.getMap().setOnMapClickListener(new AMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                isValid = false;
+                if (currentMarker != null && currentMarker.isVisible()) {
+                    currentMarker.setVisible(false);
+                    currentMarker.remove();
+                }
+                currentMarker = mMapView.getMap().addMarker(new MarkerOptions()
+                        .position(latLng));
+                choosePointPresenter.checkMark(latLng);
             }
         });
     }
@@ -151,6 +179,11 @@ public class ChoosePointFragment extends BaseFragment implements ChoosePointView
     public void initData() {
         choosePointPresenter = new ChoosePointPresenter();
         choosePointPresenter.attachView(this);
+    }
+
+    @Override
+    public void setValid(boolean isValid) {
+        this.isValid = isValid;
     }
 
     @Override
@@ -172,21 +205,6 @@ public class ChoosePointFragment extends BaseFragment implements ChoosePointView
                     .title(item.getTitle())
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-//            items.add(item);
-            Log.d(TAG, "_id" + item.getID());
-            Log.d(TAG, "_location" + item.getLatLonPoint().toString());
-            Log.d(TAG, "_name" + item.getTitle());
-            Log.d(TAG, "_address" + item.getSnippet());
-            Log.d(TAG, "_caretetime" + item.getCreatetime());
-            Log.d(TAG, "_updatetime" + item.getUpdatetime());
-            Log.d(TAG, "_distance" + item.getDistance());
-            Iterator iter = item.getCustomfield().entrySet().iterator();
-            while (iter.hasNext()) {
-                Map.Entry entry = (Map.Entry) iter.next();
-                Object key = entry.getKey();
-                Object val = entry.getValue();
-                Log.d(TAG, key + "   " + val);
-            }
         } else {
             ToastUtil.showerror(getContext(), rCode);
         }
@@ -195,43 +213,22 @@ public class ChoosePointFragment extends BaseFragment implements ChoosePointView
 
     @Override
     public void onCloudSearched(CloudResult result, int rCode) {
-
         if (rCode == 1000) {
+            mMapView.getMap().clear();
             if (result != null && result.getQuery() != null) {
                 if (result.getQuery().equals(choosePointPresenter.getQuery())) {
                     mCloudItems = result.getClouds();
 
                     if (mCloudItems != null && mCloudItems.size() > 0) {
-                        mMapView.getMap().clear();
                         mPoiCloudOverlay = new CloudOverlayMarks(mMapView.getMap(), mCloudItems);
                         mPoiCloudOverlay.removeFromMap();
                         mPoiCloudOverlay.addToMap();
-                        // mPoiCloudOverlay.zoomToSpan();
-                        for (CloudItem item : mCloudItems) {
-//                            items.add(item);
-                            Log.d(TAG, "_id " + item.getID());
-                            Log.d(TAG, "_location "
-                                    + item.getLatLonPoint().toString());
-                            Log.d(TAG, "_name " + item.getTitle());
-                            Log.d(TAG, "_address " + item.getSnippet());
-                            Log.d(TAG, "_caretetime " + item.getCreatetime());
-                            Log.d(TAG, "_updatetime " + item.getUpdatetime());
-                            Log.d(TAG, "_distance " + item.getDistance());
-                            Iterator iter = item.getCustomfield().entrySet()
-                                    .iterator();
-                            while (iter.hasNext()) {
-                                Map.Entry entry = (Map.Entry) iter.next();
-                                Object key = entry.getKey();
-                                Object val = entry.getValue();
-                                Log.d(TAG, key + "   " + val);
-                            }
-                        }
                     } else {
-                        ToastUtil.show(getContext(), R.string.no_result);
+//                        ToastUtil.show(getContext(), R.string.no_result);
                     }
                 }
             } else {
-                ToastUtil.show(getContext(), R.string.no_result);
+//                ToastUtil.show(getContext(), R.string.no_result);
             }
         } else {
             ToastUtil.showerror(getContext(), rCode);

@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -61,7 +62,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
             }
 
             @Override
-            public void clickRight() {
+            public void clickRight(MenuItem item) {
 
             }
         });
