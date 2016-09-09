@@ -9,21 +9,36 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.design.widget.TextInputLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="请输入标记地址的描述信息"
-            app:errorEnabled="false">
+            android:layout_height="@dimen/px_800">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/editTv"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/px_800"
-                android:gravity="top"
-                android:padding="@dimen/padding_usual"
-                android:textColorHint="@color/black_9"
-                android:textSize="@dimen/usual_txt_size"/>
-        </android.support.design.widget.TextInputLayout>
+                android:layout_height="match_parent"
+                android:hint="请输入标记地址的描述信息"
+                app:errorEnabled="false">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#fff"
+                    android:gravity="top"
+                    android:maxLength="500"
+                    android:padding="@dimen/padding_usual"
+                    android:textColorHint="@color/black_9"
+                    android:textSize="@dimen/usual_txt_size"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textCountTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:layout_margin="@dimen/padding_usual"
+                android:text="0/500"/>
+        </FrameLayout>
 
         <View style="@style/divider_h"/>
 
@@ -77,34 +92,76 @@
 
         <View style="@style/divider_h"/>
 
-        <android.support.v7.widget.AppCompatCheckedTextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/usual_height"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/padding_usual"
-            android:paddingRight="@dimen/padding_usual"
-            android:text="111"
-            android:textColor="#000"/>
+            android:layout_height="@dimen/usual_height">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/padding_usual"
+                android:paddingRight="@dimen/padding_usual"
+                android:text="111"
+                android:textColor="#000"/>
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/padding_usual"/>
+
+        </RelativeLayout>
+
         <View style="@style/divider_h"/>
 
-        <android.support.v7.widget.AppCompatCheckedTextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/usual_height"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/padding_usual"
-            android:paddingRight="@dimen/padding_usual"
-            android:text="111"
-            android:textColor="#000"/>
+            android:layout_height="@dimen/usual_height">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/padding_usual"
+                android:paddingRight="@dimen/padding_usual"
+                android:text="111"
+                android:textColor="#000"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/padding_usual"/>
+
+        </RelativeLayout>
+
         <View style="@style/divider_h"/>
 
-        <android.support.v7.widget.AppCompatCheckedTextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/usual_height"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/padding_usual"
-            android:paddingRight="@dimen/padding_usual"
-            android:text="111"
-            android:textColor="#000"/>
+            android:layout_height="@dimen/usual_height">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/padding_usual"
+                android:paddingRight="@dimen/padding_usual"
+                android:text="111"
+                android:textColor="#000"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/padding_usual"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
 

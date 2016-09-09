@@ -30,7 +30,6 @@ import com.mesor.journey.addmark.presenter.ChoosePointPresenter;
 import com.mesor.journey.addmark.view.ChoosePointView;
 import com.mesor.journey.framework.BaseFragment;
 import com.mesor.journey.utils.AMapUtil;
-import com.mesor.journey.utils.Constants;
 import com.mesor.journey.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -50,6 +49,9 @@ public class ChoosePointFragment extends BaseFragment implements ChoosePointView
     private CloudOverlayMarks mPoiCloudOverlay;
     private ArrayList<CloudItem> mCloudItems;
     private LatLng[] latLngs;
+
+    private float scale;
+    private LatLng center;
 
     public Marker getCurrentMarker() {
         if (!isValid) {
@@ -119,9 +121,14 @@ public class ChoosePointFragment extends BaseFragment implements ChoosePointView
             @Override
             public void onTouch(MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    if (mMapView.getMap().getScalePerPixel() > Constants.MAX_SCALE_PER_PIXEL) {
+                    float new_scale = mMapView.getMap().getScalePerPixel();
+                    LatLng new_center = mMapView.getMap().getProjection().fromScreenLocation(new Point(mMapView.getWidth() / 2, mMapView.getHeight() / 2));
+                    if (new_scale >= scale && new_center.equals(center)) {
+                        scale = new_scale;
                         return;
                     }
+                    scale = new_scale;
+                    center = new_center;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
                         if (getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
                             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
@@ -139,8 +146,7 @@ public class ChoosePointFragment extends BaseFragment implements ChoosePointView
                 }
             }
         });
-        if (myLocation != null)
-            mMapView.getMap().moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+
         mMapView.getMap().setOnMapLoadedListener(new AMap.OnMapLoadedListener() {
             @Override
             public void onMapLoaded() {
@@ -150,14 +156,40 @@ public class ChoosePointFragment extends BaseFragment implements ChoosePointView
                         return;
                     }
 
-                int left = 10, right = mMapView.getWidth() - 10, top = 10, bottom = mMapView.getHeight() - 10;
-                Projection projection = mMapView.getMap().getProjection();
-                latLngs = new LatLng[]{projection.fromScreenLocation(new Point(left, bottom)), //projection.fromScreenLocation(new Point(left, bottom)),
-                        // projection.fromScreenLocation(new Point(left, top)),
-                        projection.fromScreenLocation(new Point(right, top))
-                        //, projection.fromScreenLocation(new Point(right, bottom))
-                };
-                choosePointPresenter.searchMarks(latLngs);
+                if (myLocation != null)
+                    mMapView.getMap().animateCamera(CameraUpdateFactory.newLatLng(myLocation), new AMap.CancelableCallback() {
+                        @Override
+                        public void onFinish() {
+                            int left = 10, right = mMapView.getWidth() - 10, top = 10, bottom = mMapView.getHeight() - 10;
+                            Projection projection = mMapView.getMap().getProjection();
+                            latLngs = new LatLng[]{projection.fromScreenLocation(new Point(left, bottom)), //projection.fromScreenLocation(new Point(left,
+                                    // bottom)),
+                                    // projection.fromScreenLocation(new Point(left, top)),
+                                    projection.fromScreenLocation(new Point(right, top))
+                                    //, projection.fromScreenLocation(new Point(right, bottom))
+                            };
+                            choosePointPresenter.searchMarks(latLngs);
+                            scale = mMapView.getMap().getScalePerPixel();
+                            center = mMapView.getMap().getProjection().fromScreenLocation(new Point(mMapView.getWidth() / 2, mMapView.getHeight() / 2));
+                        }
+
+                        @Override
+                        public void onCancel() {
+
+                        }
+                    });
+                else {
+                    int left = 10, right = mMapView.getWidth() - 10, top = 10, bottom = mMapView.getHeight() - 10;
+                    Projection projection = mMapView.getMap().getProjection();
+                    latLngs = new LatLng[]{projection.fromScreenLocation(new Point(left, bottom)), //projection.fromScreenLocation(new Point(left, bottom)),
+                            // projection.fromScreenLocation(new Point(left, top)),
+                            projection.fromScreenLocation(new Point(right, top))
+                            //, projection.fromScreenLocation(new Point(right, bottom))
+                    };
+                    choosePointPresenter.searchMarks(latLngs);
+                    scale = mMapView.getMap().getScalePerPixel();
+                    center = mMapView.getMap().getProjection().fromScreenLocation(new Point(mMapView.getWidth() / 2, mMapView.getHeight() / 2));
+                }
             }
         });
         mMapView.getMap().setOnMapClickListener(new AMap.OnMapClickListener() {
@@ -173,6 +205,7 @@ public class ChoosePointFragment extends BaseFragment implements ChoosePointView
                 choosePointPresenter.checkMark(latLng);
             }
         });
+
     }
 
     @Override
@@ -215,6 +248,10 @@ public class ChoosePointFragment extends BaseFragment implements ChoosePointView
     public void onCloudSearched(CloudResult result, int rCode) {
         if (rCode == 1000) {
             mMapView.getMap().clear();
+            if (currentMarker != null) {
+                currentMarker = mMapView.getMap().addMarker(new MarkerOptions()
+                        .position(currentMarker.getPosition()));
+            }
             if (result != null && result.getQuery() != null) {
                 if (result.getQuery().equals(choosePointPresenter.getQuery())) {
                     mCloudItems = result.getClouds();

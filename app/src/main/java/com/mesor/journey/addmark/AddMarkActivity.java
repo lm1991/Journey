@@ -48,6 +48,20 @@ public class AddMarkActivity extends BaseActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        if (current_fragment == FRAGMENT_EDIT_DETAIL) {
+            current_fragment = FRAGMENT_CHOOSE_POINT;
+            setTitle("设置标记位置");
+            invalidateOptionsMenu();
+//            getSupportFragmentManager().popBackStackImmediate();
+        }else {
+            finish();
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_next_step, menu);
         if (current_fragment == FRAGMENT_EDIT_DETAIL) {
